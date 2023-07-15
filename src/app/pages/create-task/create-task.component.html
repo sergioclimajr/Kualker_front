@@ -1,0 +1,21 @@
+<app-menu *ngIf="editar"></app-menu>
+<div class="container">
+    <form class="row w-100" style="margin-top: 80px">
+        <div class="col d-flex mx-5" style="flex-direction: column">
+            <h1 class="mb-5" style="text-align: center;" *ngIf="!editar">Cadastro de nova Tarefa</h1>
+            <h1 class="mb-5" style="text-align: center;" *ngIf="editar">Edição de Tarefa</h1>
+            <mat-form-field>
+                <mat-label>Título</mat-label>
+                <input matInput placeholder="Título da Tarefa: "  [(ngModel)]="tarefa.titulo" name="nome">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Descrição</mat-label>
+                <input matInput placeholder="Descrição da Tarefa: "  [(ngModel)]="tarefa.descricao" name="descricao">
+            </mat-form-field>
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-dark"  (click)="inserirTarefa()" *ngIf="!editar">Cadastrar tarefa</button>
+                <button class="btn btn-dark"  (click)="editarTarefa()" *ngIf="editar">Editar Tarefa</button>
+            </div>
+        </div>
+    </form>
+</div>
