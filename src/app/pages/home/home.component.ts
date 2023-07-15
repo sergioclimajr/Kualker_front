@@ -4,6 +4,7 @@ import { Projeto } from 'src/app/shared/model/project';
 import { Tarefa } from 'src/app/shared/model/task';
 import { ProjectService } from 'src/app/shared/service/project.service';
 import { TarefaService } from 'src/app/shared/service/task.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -40,6 +41,16 @@ export class HomeComponent {
   }
 
   deletarProjeto(projeto: Projeto): void {
+    console.log(projeto.tarefas)
+    if (projeto.tarefas == undefined || projeto.tarefas.length>0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Não é possível deletar este projeto, pois ele possui tarefas associadas.',
+      
+      })
+      return 
+    }
     this.projetoService.deletar(projeto.id || '').subscribe(
       () => {
         this.projetos = this.projetos.filter(p => p.id !== projeto.id)
